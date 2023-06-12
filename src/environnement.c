@@ -3,7 +3,6 @@
 
 #include "environnement.h"
 
-<<<<<<< HEAD
 void initEnv(environnement_st *env, char *nomFic) {
     FILE *fichier = fopen(nomFic, "r");
     if (fichier == NULL) {
