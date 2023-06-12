@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "environnement.h"
-#define TAILLE_MAX 500
 
 void initEnv(environnement_st *env, char *nomFic) {
     FILE *fichier = fopen(nomFic, "r");
     if (fichier == NULL) {
-        printf("Erreur lors de l'ouverture du fichier.\n");
+        printf("Erreur lors de l'ouverture du fichier data %s.\n", nomFic);
         exit(1);
     }
 
@@ -37,11 +37,13 @@ void initEnv(environnement_st *env, char *nomFic) {
 }
 
 int readEtat(char* strEtat) {
-    int etat;
-    //TODO: Convertir les strings du fichier en constante
+    int etat = 0;
+    if (strcmp(strEtat, "CIBLE") == 0)
+        etat = CIBLE_NON_COUVERTE;
+    else if (strcmp(strEtat, "OBSTACLE") == 0)
+        etat = OBSTACLE;
     return etat;
 }
-
 
 void printEnv(environnement_st *env) {
     for (int i = 0; i < env->l; i++) {
