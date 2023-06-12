@@ -10,11 +10,12 @@
 typedef struct {
   int priorite;
   int etat;
+  int coord[2]; //pour pouvoir trier sans perdre les coordonnées d'origine
 } case_st;
 
 typedef struct {
-  int l;
-  int c;
+  int l; //nombre de ligne
+  int c; //nombre de colonnes
   case_st **grille;
 } environnement_st;
 
