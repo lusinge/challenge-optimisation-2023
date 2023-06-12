@@ -20,7 +20,51 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#include "environnement.h"
+#include "challenge.h"
+
+char* dataName(int instance);
+char* outputName(int instance);
 
 int main (int argc, char *argv[]) {
+    environnement_st *env;
+    env = (environnement_st*) malloc(sizeof(environnement_st));
+    char nomData[] = "data/grnn.txt";
+    char nomOutput[] = "output/res_n.txt";
+
+    for (int i = 1; i <= 16; i++) {
+        strcpy(nomData, dataName(i));
+        strcpy(nomOutput, outputName(i));
+        printf("%s\n", nomData);
+        printf("%s\n", nomOutput);
+
+        initEnv(env, nomData);
+       // printEnv(env);
+        algo1(env);
+
+
+        writeEnv(nomOutput, env, i);
+
+    }
+
     return 0;
 }
+
+char* dataName(int instance) {
+    char* filePath = (char*) malloc(sizeof("data/grnn.txt"));
+
+    sprintf(filePath, "data/gr%d.txt", instance); // Format the file path string
+
+    return filePath;
+}
+
+char* outputName(int instance) {
+    char* filePath = (char*) malloc(sizeof("output/res_n.txt"));
+
+    sprintf(filePath, "output/res_%d.txt", instance); // Format the file path string
+
+    return filePath;
+}
+
