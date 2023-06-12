@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "environnement.h"
 
@@ -33,9 +34,12 @@ void initEnv(environnement_st *env, char *nomFic) {
     fclose(fichier);
 }
 
-void readEtat(char* strEtat) {
-    int etat;
-    //TODO: Convertir les strings du fichier en constante
+int readEtat(char* strEtat) {
+    int etat = 0;
+    if (strcmp(strEtat, "CIBLE") == 0)
+        etat = CIBLE;
+    else if (strcmp(strEtat, "OBSTACLE") == 0)
+        etat = OBSTACLE;
     return etat;
 }
 
