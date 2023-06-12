@@ -8,6 +8,8 @@
 #define SURVEILLANT 4
 #define CIBLE_ET_SURVEILLANT 5
 
+#define TAILLE_MAX 500
+
 typedef struct {
   int priorite;
   int etat;
