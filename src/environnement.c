@@ -3,6 +3,7 @@
 
 #include "environnement.h"
 
+<<<<<<< HEAD
 void initEnv(environnement_st *env, char *nomFic) {
     FILE *fichier = fopen(nomFic, "r");
     if (fichier == NULL) {
@@ -38,3 +39,80 @@ void readEtat(char* strEtat) {
     //TODO: Convertir les strings du fichier en constante
     return etat;
 }
+=======
+void incrementer(case_st sommet, environnement_st env)
+{
+    int i,j;
+    sommet.priorite=1;
+    i=sommet.coord[0];
+    j=sommet.coord[1];
+    while (env.grille[i][j].etat!=2 && 0<i<env.l-1)
+    {
+        sommet.priorite+=1;
+        i++;
+    }
+
+    i=sommet.coord[0];
+    j=sommet.coord[1];
+    while (env.grille[i][j].etat!=2 && 0<i<env.l-1)
+    {
+        sommet.priorite+=1;
+        i--;
+    }
+
+    i=sommet.coord[0];
+    j=sommet.coord[1];
+    while (env.grille[i][j].etat!=2 && 0<j<env.c-1)
+    {
+        sommet.priorite+=1;
+        j++;
+    }
+
+    i=sommet.coord[0];
+    j=sommet.coord[1];
+    while (env.grille[i][j].etat!=2 && 0<j<env.c-1)
+    {
+        sommet.priorite+=1;
+        j--;
+    }
+}
+
+void decrementer(case_st sommet, environnement_st env)
+{
+    int i,j;
+    sommet.priorite=1;
+    i=sommet.coord[0];
+    j=sommet.coord[1];
+    while (env.grille[i][j].etat!=2 && 0<i<env.l-1)
+    {
+        sommet.priorite-=1;
+        i++;
+    }
+
+    i=sommet.coord[0];
+    j=sommet.coord[1];
+    while (env.grille[i][j].etat!=2 && 0<i<env.l-1)
+    {
+        sommet.priorite-=1;
+        i--;
+    }
+
+    i=sommet.coord[0];
+    j=sommet.coord[1];
+    while (env.grille[i][j].etat!=2 && 0<j<env.c-1)
+    {
+        sommet.priorite-=1;
+        j++;
+    }
+
+    i=sommet.coord[0];
+    j=sommet.coord[1];
+    while (env.grille[i][j].etat!=2 && 0<j<env.c-1)
+    {
+        sommet.priorite-=1;
+        j--;
+    }
+}
+
+void tri(int *tab);
+>>>>>>> 4788a6d3edf44cb20a8dcb7a0266ecdf70a4f6b3
