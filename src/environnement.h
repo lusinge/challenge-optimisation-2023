@@ -1,11 +1,12 @@
 #ifndef ENVIRONNEMENT_H
 #define ENVIRONNEMENT_H
 
-#define NON_COUVERT 0
-#define CIBLE 1
-#define OBSTACLE 2
-#define SURVEILLANT 3
-#define CIBLE_ET_SURVEILLANT 4
+#define RIEN 0
+#define CIBLE_NON_COUVERTE 1
+#define CIBLE_COUVERTE 2
+#define OBSTACLE 3
+#define SURVEILLANT 4
+#define CIBLE_ET_SURVEILLANT 5
 
 typedef struct {
   int priorite;
@@ -16,12 +17,14 @@ typedef struct {
 typedef struct {
   int l; //nombre de ligne
   int c; //nombre de colonnes
+  int nbCiblesNonCouvertes;
   case_st **grille;
 } environnement_st;
 
 
 void initEnv(environnement_st *env, char *nomFic);
 int readEtat(char* strEtat);
+void printEnv(environnement_st *env);
 
 
 void incrementer(case_st sommet,environnement_st *env);
