@@ -37,7 +37,7 @@ void initEnv(environnement_st *env, char *nomFic) {
 int readEtat(char* strEtat) {
     int etat = 0;
     if (strcmp(strEtat, "CIBLE") == 0)
-        etat = CIBLE;
+        etat = CIBLE_NON_COUVERTE;
     else if (strcmp(strEtat, "OBSTACLE") == 0)
         etat = OBSTACLE;
     return etat;
