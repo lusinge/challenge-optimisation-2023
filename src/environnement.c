@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "environnement.h"
-#define TAILLE_MAX 500
+
 
 void initEnv(environnement_st *env, char *nomFic) {
     FILE *fichier = fopen(nomFic, "r");
@@ -22,10 +24,12 @@ void initEnv(environnement_st *env, char *nomFic) {
         env->grille[i] = (case_st *)malloc(nbColonnes * sizeof(case_st));
     }
 
-    int etat, i, j;
+    int i, j;
     char strEtat[20];
     while (fscanf(fichier, "%s %d %d", strEtat, &i, &j) == 3) {
         env->grille[i][j].etat = readEtat(strEtat);
+        if (strcmp(strEtat, "CIBLE")
+                env->nbCiblesNonCouvertes++;
         env->grille[i][j].coord[0] = i;
         env->grille[i][j].coord[1] = j;
     }
@@ -34,12 +38,24 @@ void initEnv(environnement_st *env, char *nomFic) {
 }
 
 int readEtat(char* strEtat) {
-    int etat;
-    //TODO: Convertir les strings du fichier en constante
+    int etat = 0;
+    if (strcmp(strEtat, "CIBLE") == 0)
+        etat = CIBLE_NON_COUVERTE;
+    else if (strcmp(strEtat, "OBSTACLE") == 0)
+        etat = OBSTACLE;
     return etat;
 }
 
-void incrementer(case_st sommet, environnement_st *env)
+void printEnv(environnement_st *env) {
+    for (int i = 0; i < env->l; i++) {
+        for (int j = 0; j < env->c; j++){
+            printf("%d", env->grille[i][j].etat);
+        }
+        printf("\n");
+    }
+}
+
+void incrementer(case_st sommet, environnement_st env)
 {
     int i,j;
     sommet.priorite=1;
@@ -194,3 +210,4 @@ void placement_surveillant(environnement_st *env)
     while  ()
 
 }
+
