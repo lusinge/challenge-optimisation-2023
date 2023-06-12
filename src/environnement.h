@@ -19,4 +19,7 @@ typedef struct {
   case_st **grille;
 } environnement_st;
 
+void initEnv(environnement_st *env, char *nomFic);
+void readEtat(char* strEtat);
+
 #endif // ENVIRONNEMENT_H
