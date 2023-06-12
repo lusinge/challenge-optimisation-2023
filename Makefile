@@ -7,11 +7,11 @@ DEBUG = -ggdb -fno-omit-frame-pointer
 OPTIMIZE = -O2
 
 
-challenge-optimisation-2023: Makefile src/main.c
-	$(CC) -o $@ $(WARNINGS) $(DEBUG) $(OPTIMIZE) src/main.c
+challenge-optimisation-2023: Makefile src/main.c src/environnement.c
+	$(CC) -o $@ $(WARNINGS) $(DEBUG) $(OPTIMIZE) src/main.c src/environnement.c
 
 clean:
-	rm -f pse-billeterie-client
+	rm -f challenge-optimisation-2023
 
 # Builder will call this to install the application before running.
 install:
