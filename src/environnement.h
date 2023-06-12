@@ -19,15 +19,15 @@ typedef struct {
   case_st **grille;
 } environnement_st;
 
-<<<<<<< HEAD
+
 void initEnv(environnement_st *env, char *nomFic);
 void readEtat(char* strEtat);
 
-=======
+
 void incrementer(case_st sommet,environnement_st grille);
 void decrementer(case_st sommet,environnement_st grille);
 void tri(int *tab);
->>>>>>> 4788a6d3edf44cb20a8dcb7a0266ecdf70a4f6b3
+
 #endif // ENVIRONNEMENT_H
 
 

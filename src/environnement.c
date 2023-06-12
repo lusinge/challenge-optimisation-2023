@@ -39,7 +39,7 @@ void readEtat(char* strEtat) {
     //TODO: Convertir les strings du fichier en constante
     return etat;
 }
-=======
+
 void incrementer(case_st sommet, environnement_st env)
 {
     int i,j;
@@ -115,4 +115,3 @@ void decrementer(case_st sommet, environnement_st env)
 }
 
 void tri(int *tab);
->>>>>>> 4788a6d3edf44cb20a8dcb7a0266ecdf70a4f6b3
