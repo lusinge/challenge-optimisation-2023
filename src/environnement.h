@@ -26,7 +26,8 @@ void readEtat(char* strEtat);
 
 void incrementer(case_st sommet,environnement_st grille);
 void decrementer(case_st sommet,environnement_st grille);
-void tri(int *tab);
+void tri_fusion(case_st tab[],int deb,int fin,environnement_st env);
+void fusion(case_st tab[], int deb1, int fin1, int fin2,environnement_st env);
 
 #endif // ENVIRONNEMENT_H
 
