@@ -23,7 +23,7 @@ void initEnv(environnement_st *env, char *nomFic) {
         env->grille[i] = (case_st *)malloc(nbColonnes * sizeof(case_st));
     }
 
-    int etat, i, j;
+    int i, j;
     char strEtat[20];
     while (fscanf(fichier, "%s %d %d", strEtat, &i, &j) == 3) {
         env->grille[i][j].etat = readEtat(strEtat);
@@ -41,6 +41,15 @@ int readEtat(char* strEtat) {
     else if (strcmp(strEtat, "OBSTACLE") == 0)
         etat = OBSTACLE;
     return etat;
+}
+
+void printEnv(environnement_st *env) {
+    for (int i = 0; i < env->l; i++) {
+        for (int j = 0; j < env->c; j++){
+            printf("%d", env->grille[i][j].etat);
+        }
+        printf("\n");
+    }
 }
 
 void incrementer(case_st sommet, environnement_st env)

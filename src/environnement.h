@@ -22,6 +22,7 @@ typedef struct {
 
 void initEnv(environnement_st *env, char *nomFic);
 int readEtat(char* strEtat);
+void printEnv(environnement_st *env);
 
 
 void incrementer(case_st sommet,environnement_st grille);
