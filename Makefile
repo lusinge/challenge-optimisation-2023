@@ -7,8 +7,8 @@ DEBUG = -ggdb -fno-omit-frame-pointer
 OPTIMIZE = -O2
 
 
-challenge-optimisation-2023: Makefile src/main.c src/environnement.c
-	$(CC) -o $@ $(WARNINGS) $(DEBUG) $(OPTIMIZE) src/main.c src/environnement.c
+challenge-optimisation-2023: Makefile src/main.c src/environnement.c src/challenge.c
+	$(CC) -o $@ $(WARNINGS) $(DEBUG) $(OPTIMIZE) src/main.c src/environnement.c src/challenge.c
 
 clean:
 	rm -f challenge-optimisation-2023

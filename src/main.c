@@ -42,7 +42,7 @@ int main (int argc, char *argv[]) {
 
         initEnv(env, nomData);
        // printEnv(env);
-        algo1(env);
+        algo2(env);
 
 
         writeEnv(nomOutput, env, i);

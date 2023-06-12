@@ -35,3 +35,17 @@ void writeEnv(char *nomFic, environnement_st *env, int instance) {
 
     fclose(fichier);
 }
+
+/*void algo2(environnement_st *env) {
+    for (int i = 0; i < env->l; i++) {
+        for (int j = 0; j < env->c; j++) {
+            if (env->grille[i][j].etat == CIBLE_NON_COUVERTE)
+                incrementer(env->grille[i][j], env);
+        }
+    }
+
+    case_st *tab;
+    creation_tab(env->l*env->c, tab, env);
+
+
+}*/
