@@ -19,4 +19,9 @@ typedef struct {
   case_st **grille;
 } environnement_st;
 
+void incrementer(case_st sommet,environnement_st grille);
+void decrementer(case_st sommet,environnement_st grille);
+void tri(int *tab);
 #endif // ENVIRONNEMENT_H
+
+
