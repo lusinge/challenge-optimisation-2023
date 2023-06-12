@@ -27,6 +27,8 @@ void initEnv(environnement_st *env, char *nomFic) {
     char strEtat[20];
     while (fscanf(fichier, "%s %d %d", strEtat, &i, &j) == 3) {
         env->grille[i][j].etat = readEtat(strEtat);
+        if (strcmp(strEtat, "CIBLE")
+                env->nbCiblesNonCouvertes++;
         env->grille[i][j].coord[0] = i;
         env->grille[i][j].coord[1] = j;
     }

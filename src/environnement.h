@@ -17,6 +17,7 @@ typedef struct {
 typedef struct {
   int l; //nombre de ligne
   int c; //nombre de colonnes
+  int nbCiblesNonCouvertes;
   case_st **grille;
 } environnement_st;
 
