@@ -114,4 +114,56 @@ void decrementer(case_st sommet, environnement_st env)
     }
 }
 
-void tri(int *tab);
+void tri_fusion(case_st tab[],int deb,int fin,environnement_st env)
+{
+   int lg, finSequence1;
+
+  lg = fin - deb + 1;
+  finSequence1 = deb + lg/2 - 1;
+  if (lg > 1)
+  {
+    tri_fusion(tab, deb, finSequence1,env);
+    tri_fusion(tab, finSequence1 + 1, fin,env);
+    fusion(tab, deb, finSequence1, fin,env);
+  }
+}
+
+void fusion(case_st tab[], int deb1, int fin1, int fin2,environnement_st env)
+{
+  case_st temp[TAILLE_MAX];
+  int i1 = deb1, i2 = fin1 + 1, itemp = 0, i;
+
+ 
+  while (i1 <= fin1 && i2 <= fin2)
+  {
+    if (tab[i1].priorite <= tab[i2].priorite)
+    {
+      temp[itemp] = tab[i1];
+      i1++;
+    }
+    else
+    {
+      temp[itemp] = tab[i2];
+      i2++;
+    }
+    itemp++;
+  }
+  // a ce stade on a fini le parcours d'au moins l'une des 2 sequences,
+  // on copie les elements restants de l'autre sequence
+  while (i1 <= fin1)
+  {
+      temp[itemp] = tab[i1];
+      i1++;
+      itemp++;
+  }
+  while (i2 <= fin2)
+  {
+      temp[itemp] = tab[i2];
+      i2++;
+      itemp++;
+  }
+
+  // recopie du tableau temporaire dans la sequence finale
+  for (i = deb1; i <= fin2; i++)
+    tab[i] = temp[i - deb1];
+}
