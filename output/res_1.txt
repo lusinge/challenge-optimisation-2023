@@ -1,0 +1,11 @@
+EQUIPE Ronflex
+INSTANCE 1
+0 0
+0 11
+1 19
+3 3
+3 9
+3 17
+5 4
+7 2
+7 15

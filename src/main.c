@@ -25,8 +25,8 @@
 #include "environnement.h"
 #include "challenge.h"
 
-char* dataName(int instance);
-char* outputName(int instance);
+char* dataName(int n);
+char* outputName(int n);
 
 int main (int argc, char *argv[]) {
     environnement_st *env;
@@ -34,20 +34,19 @@ int main (int argc, char *argv[]) {
     char nomData[] = "data/grnn.txt";
     char nomOutput[] = "output/res_n.txt";
 
-    for (int i = 1; i <= 16; i++) {
-        strcpy(nomData, dataName(i));
-        strcpy(nomOutput, outputName(i));
-        printf("%s\n", nomData);
-        printf("%s\n", nomOutput);
+    int i = atoi(argv[1]);
 
-        initEnv(env, nomData);
-       // printEnv(env);
-        algo2(env);
+    strcpy(nomData, dataName(i));
+    strcpy(nomOutput, outputName(i));
+    printf("%s\n", nomData);
+    printf("%s\n", nomOutput);
+
+    initEnv(env, nomData);
+   // printEnv(env);
+    algo2(env);
 
 
-        writeEnv(nomOutput, env, i);
-
-    }
+    writeEnv(nomOutput, env, i);
 
     return 0;
 }

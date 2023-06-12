@@ -52,6 +52,15 @@ void printEnv(environnement_st *env) {
         }
         printf("\n");
     }
+    printf("\n");
+
+    for (int i = 0; i < env->l; i++) {
+        for (int j = 0; j < env->c; j++){
+            printf("%d", env->grille[i][j].priorite);
+        }
+        printf("\n");
+    }
+    printf("\n\n");
 }
 
 void incrementer(int i, int j, environnement_st *env)
@@ -63,7 +72,7 @@ void incrementer(int i, int j, environnement_st *env)
     k = i+1;
     l = j;
     //Parcours à droite
-    while (env->grille[k][l].etat != OBSTACLE && 0 <= k && k < env->l)
+    while (0 <= k && k < env->l && env->grille[k][l].etat != OBSTACLE)
         {
             (env->grille[k][l].priorite)++;
             k++;
@@ -72,7 +81,7 @@ void incrementer(int i, int j, environnement_st *env)
     k = i-1;
     l = j;
     //Parcours à gauche
-    while (env->grille[k][l].etat != OBSTACLE && 0 <= k && k < env->l)
+   while (0 <= k && k < env->l && env->grille[k][l].etat != OBSTACLE)
         {
             (env->grille[k][l].priorite)++;
             k--;
@@ -81,7 +90,7 @@ void incrementer(int i, int j, environnement_st *env)
     k = i;
     l = j+1;
     //Parcours en bas
-    while (env->grille[k][l].etat != OBSTACLE && 0 <= l && l < env->c)
+   while (0 <= l && l < env->c && env->grille[k][l].etat != OBSTACLE)
         {
             (env->grille[k][l].priorite)++;
             l++;
@@ -90,7 +99,7 @@ void incrementer(int i, int j, environnement_st *env)
     k = i;
     l = j-1;
     //Parcours en haut
-    while (env->grille[k][l].etat != OBSTACLE && 0 <= l && l < env->c)
+   while (0 <= l && l < env->c && env->grille[k][l].etat != OBSTACLE)
         {
             (env->grille[k][l].priorite)++;
             l--;
@@ -106,7 +115,7 @@ void decrementer(int i, int j, environnement_st *env)
     k = i+1;
     l = j;
     //Parcours à droite
-    while (env->grille[k][l].etat != OBSTACLE && 0 <= k && k < env->l)
+    while (0 <= k && k < env->l && env->grille[k][l].etat != OBSTACLE)
         {
             (env->grille[k][l].priorite)--;
             k++;
@@ -115,7 +124,7 @@ void decrementer(int i, int j, environnement_st *env)
     k = i-1;
     l = j;
     //Parcours à gauche
-    while (env->grille[k][l].etat != OBSTACLE && 0 <= k && k < env->l)
+    while (0 <= k && k < env->l && env->grille[k][l].etat != OBSTACLE)
         {
             (env->grille[k][l].priorite)--;
             k--;
@@ -124,7 +133,7 @@ void decrementer(int i, int j, environnement_st *env)
     k = i;
     l = j+1;
     //Parcours en bas
-    while (env->grille[k][l].etat != OBSTACLE && 0 <= l && l < env->c)
+   while (0 <= l && l < env->c && env->grille[k][l].etat != OBSTACLE)
         {
             (env->grille[k][l].priorite)--;
             l++;
@@ -133,7 +142,7 @@ void decrementer(int i, int j, environnement_st *env)
     k = i;
     l = j-1;
     //Parcours en haut
-    while (env->grille[k][l].etat != OBSTACLE && 0 <= l && l < env->c)
+   while (0 <= l && l < env->c && env->grille[k][l].etat != OBSTACLE)
         {
             (env->grille[k][l].priorite)--;
             l--;
@@ -142,21 +151,32 @@ void decrementer(int i, int j, environnement_st *env)
 
 int couvrir(int i, int j, environnement_st *env)
 {
-    int cnt_cible_couverte = 1;
+    if (env->grille[i][j].etat == OBSTACLE)
+        return 0;
+    int cnt_cible_couverte = 0;
+    if (env->grille[i][j].etat == CIBLE_COUVERTE || env->grille[i][j].etat == CIBLE_NON_COUVERTE) {
+        if (env->grille[i][j].etat == CIBLE_NON_COUVERTE) {
+            decrementer(i, j, env);
+            cnt_cible_couverte++;
+        }
+        env->grille[i][j].etat = CIBLE_ET_SURVEILLANT;
+    }
+    else
+        env->grille[i][j].etat = SURVEILLANT;
 
-    env->grille[i][j].etat = CIBLE_COUVERTE;
 
     int k, l;
 
     //Parcours à droite
     k = i+1;
     l = j;
-    while (env->grille[k][l].etat!= OBSTACLE && 0 <= k && k < env->l)
+    while (0 <= k && k < env->l && env->grille[k][l].etat != OBSTACLE)
     {
         if(env->grille[k][l].etat == CIBLE_NON_COUVERTE)
         {
             cnt_cible_couverte++;
             env->grille[k][l].etat = CIBLE_COUVERTE;
+            decrementer(k, l, env);
         }
         k++;
     }
@@ -164,12 +184,13 @@ int couvrir(int i, int j, environnement_st *env)
     //Parcours à gauche
     k = i-1;
     l = j;
-    while (env->grille[k][l].etat!= OBSTACLE && 0 <= k && k < env->l)
+    while (0 <= k && k < env->l && env->grille[k][l].etat != OBSTACLE)
     {
         if(env->grille[k][l].etat == CIBLE_NON_COUVERTE)
         {
             cnt_cible_couverte++;
             env->grille[k][l].etat = CIBLE_COUVERTE;
+            decrementer(k, l, env);
         }
         k--;
     }
@@ -177,12 +198,13 @@ int couvrir(int i, int j, environnement_st *env)
     //Parcours en bas
     k = i;
     l = j+1;
-    while (env->grille[k][l].etat!= OBSTACLE && 0 <= l && l < env->c)
+   while (0 <= l && l < env->c && env->grille[k][l].etat != OBSTACLE)
     {
         if(env->grille[k][l].etat == CIBLE_NON_COUVERTE)
         {
             cnt_cible_couverte++;
             env->grille[k][l].etat = CIBLE_COUVERTE;
+            decrementer(k, l, env);
         }
         l++;
     }
@@ -190,12 +212,13 @@ int couvrir(int i, int j, environnement_st *env)
     //Parcours en haut
     k = i;
     l = j-1;
-    while (env->grille[k][l].etat!= OBSTACLE && 0 <= l && l < env->c)
+   while (0 <= l && l < env->c && env->grille[k][l].etat != OBSTACLE)
     {
         if(env->grille[k][l].etat == CIBLE_NON_COUVERTE)
         {
             cnt_cible_couverte++;
             env->grille[k][l].etat = CIBLE_COUVERTE;
+            decrementer(k, l, env);
         }
         l--;
     }
@@ -213,11 +236,14 @@ void algo2(environnement_st *env)
         }
     }
     
-    int priorite_max = 0;
-    int i_max = 0;
-    int j_max = 0;
+    int priorite_max = -1;
+    int i_max = -1;
+    int j_max = -1;
     
-    while (env->nbCiblesNonCouvertes > 0) {
+    while (env->nbCiblesNonCouvertes > 0 && priorite_max != 0) {
+        priorite_max = -1;
+        j_max = -1;
+        i_max = -1;
         for (int i = 0; i < env->l; i++) {
             for (int j = 0; j < env->c; j++){
                 if (priorite_max < env->grille[i][j].priorite) {
@@ -227,8 +253,8 @@ void algo2(environnement_st *env)
                 }
             }
         }
-        decrementer(i_max, j_max, env);
-        env->nbCiblesNonCouvertes = env->nbCiblesNonCouvertes - couvrir(i_max, j_max, env);
+        if (j_max >= 0 && i_max >= 0)
+            couvrir(i_max, j_max, env);
     }
 
 }
