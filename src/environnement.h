@@ -8,8 +8,6 @@
 #define SURVEILLANT 4
 #define CIBLE_ET_SURVEILLANT 5
 
-#define TAILLE_MAX 500
-
 typedef struct {
   int priorite;
   int etat;
@@ -35,7 +33,7 @@ void tri_fusion(case_st tab[],int deb,int fin,environnement_st *env);
 void fusion(case_st tab[], int deb1, int fin1, int fin2,environnement_st *env);
 void placement_surveillant(environnement_st *env);
 void creation_tab(int taille_tab,case_st *tab, environnement_st *env);
-
+void incremation_tab(case_st *tab,int taille_tab,environnement_st *env);
 #endif // ENVIRONNEMENT_H
 
 
